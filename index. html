@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GiveBack</title>
+    <!-- Use Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+        .badge {
+            transition: transform 0.3s ease, filter 0.3s ease;
+            filter: grayscale(100%);
+        }
+        .unlocked {
+            filter: grayscale(0%);
+            animation: pulse-glow 1.5s infinite;
+        }
+        .unlocked:hover {
+            transform: scale(1.05);
+        }
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 5px #fde68a, 0 0 10px #fde68a; }
+            50% { box-shadow: 0 0 15px #fde68a, 0 0 30px #fde68a; }
+            100% { box-shadow: 0 0 5px #fde68a, 0 0 10px #fde68a; }
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-sm p-4 sticky top-0 z-50">
+        <div class="container mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <h1 class="text-3xl font-bold text-gray-800">GiveBack</h1>
+            </div>
+            <nav>
+                <a href="#home" class="nav-link text-gray-600 hover:text-rose-500 font-medium transition duration-300">Home</a>
+                <a href="#about" class="nav-link ml-4 text-gray-600 hover:text-rose-500 font-medium transition duration-300">About Us</a>
+                <a href="#dashboard" class="nav-link ml-4 text-gray-600 hover:text-rose-500 font-medium transition duration-300">Dashboard</a>
+                <a href="#impact" class="nav-link ml-4 text-gray-600 hover:text-rose-500 font-medium transition duration-300">Impact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto p-6 md:p-12">
+        <!-- Home Section -->
+        <div id="home" class="page">
+            <!-- Donation Section -->
+            <section id="donation" class="bg-white p-6 md:p-8 rounded-2xl shadow-lg max-w-2xl mx-auto mb-12">
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-6 text-center">Make a Difference. Donate Today.</h2>
+                <form id="donation-form" class="space-y-4">
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                        <input type="text" id="name" name="name" required class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-rose-300 focus:ring focus:ring-rose-200 focus:ring-opacity-50">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                        <input type="email" id="email" name="email" required class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-rose-300 focus:ring focus:ring-rose-200 focus:ring-opacity-50">
+                    </div>
+                    <div>
+                        <label for="amount" class="block text-sm font-medium text-gray-700">Donation Amount (₹)</label>
+                        <input type="number" id="amount" name="amount" min="700" max="250000" required class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-rose-300 focus:ring focus:ring-rose-200 focus:ring-opacity-50">
+                    </div>
+                    <div>
+                        <label for="reason" class="block text-sm font-medium text-gray-700">Reason for Donation</label>
+                        <textarea id="reason" name="reason" rows="4" class="mt-1 block w-full rounded-lg border-gray-300 shadow-sm focus:border-rose-300 focus:ring focus:ring-rose-200 focus:ring-opacity-50"></textarea>
+                    </div>
+                    <button type="submit" class="mt-4 w-full bg-rose-500 text-white font-semibold py-3 px-4 rounded-lg shadow-md hover:bg-rose-600 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2 transition duration-300">
+                        Donate Now
+                    </button>
+                </form>
+                <div id="confirmation-message" class="mt-4 p-4 text-center text-green-700 bg-green-100 rounded-lg hidden">
+                    Thank you for your generous donation!
+                </div>
+            </section>
+
+            <!-- Badge Board Section -->
+            <section id="badges" class="p-6 md:p-8 rounded-2xl bg-gradient-to-br from-rose-100 to-rose-200 shadow-lg">
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-6 text-center">Your Impact Badges</h2>
+                <p class="text-center text-gray-600 mb-8">Unlock these badges by contributing to our cause and making a difference.</p>
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
+                    <!-- Badge 1 -->
+                    <div id="badge-1" class="badge p-4 bg-white rounded-xl shadow-lg text-center flex flex-col items-center">
+                        <span class="text-5xl mb-2">🌱</span>
+                        <h3 class="font-bold text-gray-800">First Bloom</h3>
+                        <p class="text-gray-500 text-sm mt-1">Make your very first donation.</p>
+                    </div>
+                    <!-- Badge 2 -->
+                    <div id="badge-2" class="badge p-4 bg-white rounded-xl shadow-lg text-center flex flex-col items-center">
+                        <span class="text-5xl mb-2">⭐</span>
+                        <h3 class="font-bold text-gray-800">Rising Star</h3>
+                        <p class="text-gray-500 text-sm mt-1">Contribute ₹2,075 or more.</p>
+                    </div>
+                    <!-- Badge 3 -->
+                    <div id="badge-3" class="badge p-4 bg-white rounded-xl shadow-lg text-center flex flex-col items-center">
+                        <span class="text-5xl mb-2">💖</span>
+                        <h3 class="font-bold text-gray-800">Heartfelt Giver</h3>
+                        <p class="text-gray-500 text-sm mt-1">Make a donation of ₹4,150.</p>
+                    </div>
+                    <!-- Badge 4 -->
+                    <div id="badge-4" class="badge p-4 bg-white rounded-xl shadow-lg text-center flex flex-col items-center">
+                        <span class="text-5xl mb-2">💎</span>
+                        <h3 class="font-bold text-gray-800">Diamond Supporter</h3>
+                        <p class="text-gray-500 text-sm mt-1">Donate ₹8,300 or more.</p>
+                    </div>
+                    <!-- Badge 5 -->
+                    <div id="badge-5" class="badge p-4 bg-white rounded-xl shadow-lg text-center flex flex-col items-center">
+                        <span class="text-5xl mb-2">🏆</span>
+                        <h3 class="font-bold text-gray-800">Champion</h3>
+                        <p class="text-gray-500 text-sm mt-1">Donate a total of ₹20,750.</p>
+                    </div>
+                    <!-- Badge 6 -->
+                    <div id="badge-6" class="badge p-4 bg-white rounded-xl shadow-lg text-center flex flex-col items-center">
+                        <span class="text-5xl mb-2">🌟</span>
+                        <h3 class="font-bold text-gray-800">Supernova</h3>
+                        <p class="text-gray-500 text-sm mt-1">Make 5 separate donations.</p>
+                    </div>
+                    <!-- Badge 7 -->
+                    <div id="badge-7" class="badge p-4 bg-white rounded-xl shadow-lg text-center flex flex-col items-center">
+                        <span class="text-5xl mb-2">🤝</span>
+                        <h3 class="font-bold text-gray-800">Community Builder</h3>
+                        <p class="text-gray-500 text-sm mt-1">Share the website with a friend.</p>
+                    </div>
+                    <!-- Badge 8 -->
+                    <div id="badge-8" class="badge p-4 bg-white rounded-xl shadow-lg text-center flex flex-col items-center">
+                        <span class="text-5xl mb-2">🗺️</span>
+                        <h3 class="font-bold text-gray-800">Global Impact</h3>
+                        <p class="text-gray-500 text-sm mt-1">Make a donation to a specific cause.</p>
+                    </div>
+                    <!-- Badge 9 -->
+                    <div id="badge-9" class="badge p-4 bg-white rounded-xl shadow-lg text-center flex flex-col items-center">
+                        <span class="text-5xl mb-2">🥇</span>
+                        <h3 class="font-bold text-gray-800">Gold Tier</h3>
+                        <p class="text-gray-500 text-sm mt-1">Donate ₹41,500 or more in one go.</p>
+                    </div>
+                    <!-- Badge 10 -->
+                    <div id="badge-10" class="badge p-4 bg-white rounded-xl shadow-lg text-center flex flex-col items-center">
+                        <span class="text-5xl mb-2">👑</span>
+                        <h3 class="font-bold text-gray-800">The Monarch</h3>
+                        <p class="text-gray-500 text-sm mt-1">Reach a total donation of ₹83,000.</p>
+                    </div>
+                    <!-- Badge 11 -->
+                    <div id="badge-11" class="badge p-4 bg-white rounded-xl shadow-lg text-center flex flex-col items-center">
+                        <span class="text-5xl mb-2">🎩</span>
+                        <h3 class="font-bold text-gray-800">Symphatic Aristocrat</h3>
+                        <p class="text-gray-500 text-sm mt-1">Donate ₹1,50,000 or more, 5 times.</p>
+                    </div>
+                    <!-- Badge 12 -->
+                    <div id="badge-12" class="badge p-4 bg-white rounded-xl shadow-lg text-center flex flex-col items-center">
+                        <span class="text-5xl mb-2">🧭</span>
+                        <h3 class="font-bold text-gray-800">Philanthropic Pioneer</h3>
+                        <p class="text-gray-500 text-sm mt-1">Donate ₹50,000+ with a reason.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Share Section -->
+            <section id="share" class="bg-white p-6 md:p-8 rounded-2xl shadow-lg max-w-2xl mx-auto mt-12 text-center">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Share Our Cause</h2>
+                <p class="text-gray-600 mb-4">Help us reach more people by sharing this website with your network!</p>
+                <div class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                    <button id="share-button" class="bg-rose-500 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:bg-rose-600 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2 transition duration-300">
+                        Copy Share Link
+                    </button>
+                    <div id="share-confirmation-message" class="text-green-700 bg-green-100 p-2 rounded-lg hidden">
+                        Link copied!
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- About Us Section -->
+        <div id="about" class="page hidden">
+            <section class="bg-white p-6 md:p-12 rounded-2xl shadow-lg max-w-4xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6 text-center">About Us</h2>
+                <p class="text-lg text-gray-600 mb-8 text-center max-w-2xl mx-auto">
+                    At GiveBack, we believe in the power of collective action to create meaningful change. We are a platform dedicated to making it simple and rewarding for everyone to contribute to causes they care about.
+                </p>
+    
+                <div class="space-y-12">
+                    <div>
+                        <h3 class="text-2xl font-semibold text-gray-700 mb-4">Our Mission</h3>
+                        <p class="text-gray-600 leading-relaxed">
+                            Our mission is to empower individuals to become everyday philanthropists. By simplifying the donation process and celebrating every contribution with our unique badge board, we hope to inspire a new generation of givers and build a stronger, more connected global community.
+                        </p>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-semibold text-gray-700 mb-4">Our Vision</h3>
+                        <p class="text-gray-600 leading-relaxed">
+                            We envision a world where giving is a habit, not a chore. We strive to create a platform where transparency, impact, and a sense of community are at the forefront, ensuring every dollar donated makes a visible difference.
+                        </p>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-semibold text-gray-700 mb-4">Our Team</h3>
+                        <p class="text-gray-600 leading-relaxed">
+                            GiveBack was founded by a small team of passionate individuals who wanted to leverage technology for good. Our team is dedicated to building a platform that is not only effective but also a joy to use. We are committed to upholding the highest standards of integrity and security for our donors.
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Dashboard Section -->
+        <div id="dashboard" class="page hidden">
+            <section class="bg-white p-6 md:p-12 rounded-2xl shadow-lg max-w-4xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6 text-center">Impact Dashboard</h2>
+                <p class="text-lg text-gray-600 mb-8 text-center max-w-2xl mx-auto">
+                    Track the collective impact we are making together. Every donation counts!
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                    <div class="bg-rose-50 rounded-xl p-6 shadow-md">
+                        <h3 class="text-4xl md:text-5xl font-bold text-rose-500" id="total-donations">0</h3>
+                        <p class="mt-2 text-gray-600 font-medium">Total Donations</p>
+                    </div>
+                    <div class="bg-rose-50 rounded-xl p-6 shadow-md">
+                        <h3 class="text-4xl md:text-5xl font-bold text-rose-500" id="total-amount">₹0</h3>
+                        <p class="mt-2 text-gray-600 font-medium">Total Amount Raised</p>
+                    </div>
+                    <div class="bg-rose-50 rounded-xl p-6 shadow-md">
+                        <h3 class="text-4xl md:text-5xl font-bold text-rose-500" id="donors-count">0</h3>
+                        <p class="mt-2 text-gray-600 font-medium">Unique Donors</p>
+                    </div>
+                </div>
+
+                <div class="mt-12">
+                    <h3 class="text-2xl font-semibold text-gray-700 mb-4 text-center">Goal Progress: ₹1,00,00,000</h3>
+                    <div class="w-full bg-gray-200 rounded-full h-4">
+                        <div id="goal-progress" class="bg-rose-500 h-4 rounded-full transition-all duration-500 ease-in-out" style="width: 0%;"></div>
+                    </div>
+                    <p class="text-center mt-2 text-gray-600" id="progress-text">₹0 of ₹1,00,00,000 raised.</p>
+                </div>
+
+                <!-- Money Utilization Section -->
+                <div class="mt-12">
+                    <h3 class="text-2xl font-semibold text-gray-700 mb-4 text-center">How Your Money Is Being Used</h3>
+                    <p class="text-gray-600 mb-6 text-center max-w-2xl mx-auto">
+                        We are committed to full transparency. Here is a breakdown of how the funds are currently being utilized to make a difference.
+                    </p>
+                    <div id="utilization-list" class="space-y-4">
+                        <!-- Utilization items will be dynamically added here by JavaScript -->
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Our Impact Section -->
+        <div id="impact" class="page hidden">
+            <section class="bg-white p-6 md:p-12 rounded-2xl shadow-lg max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">See the Impact of Your Generosity</h2>
+                <p class="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
+                    Your donation has the power to change a life. We focus on providing children with the tools they need to succeed. With your help, we can offer them a chance at a brighter, more promising future.
+                </p>
+                
+                <p class="text-gray-600 mt-8 mb-6 leading-relaxed max-w-3xl mx-auto">
+                    Every contribution, no matter the size, helps us provide access to education, nutritious meals, and a safe environment. We believe that every child deserves the opportunity to learn, grow, and pursue their dreams. Your support directly funds these vital programs.
+                </p>
+                <a href="#home" class="nav-link inline-block bg-rose-500 text-white font-semibold py-3 px-8 rounded-lg shadow-md hover:bg-rose-600 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2 transition duration-300">
+                    Donate Now and Make a Difference
+                </a>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white text-center p-4 mt-12">
+        <p>&copy; 2023 GiveBack.</p>
+    </footer>
+
+    <script>
+        document.getElementById('donation-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const amount = parseFloat(document.getElementById('amount').value);
+            const reason = document.getElementById('reason').value;
+
+            // Simulate a successful donation
+            const confirmationMessage = document.getElementById('confirmation-message');
+            confirmationMessage.classList.remove('hidden');
+            setTimeout(() => {
+                confirmationMessage.classList.add('hidden');
+            }, 5000);
+
+            // Update donation count and total amount in local storage
+            let donationCount = parseInt(localStorage.getItem('donationCount') || '0', 10);
+            let totalDonationAmount = parseFloat(localStorage.getItem('totalDonationAmount') || '0');
+            
+            donationCount++;
+            totalDonationAmount += amount;
+            
+            localStorage.setItem('donationCount', donationCount);
+            localStorage.setItem('totalDonationAmount', totalDonationAmount);
+
+            // Check if this donation qualifies for the Symphatic Aristocrat badge
+            let aristocratDonationCount = parseInt(localStorage.getItem('aristocratDonationCount') || '0', 10);
+            if (amount >= 150000) {
+                aristocratDonationCount++;
+                localStorage.setItem('aristocratDonationCount', aristocratDonationCount);
+            }
+
+            // Save the state of the "Global Impact" badge if a reason was provided
+            if (reason.trim().length > 0) {
+                localStorage.setItem('hasGivenReason', 'true');
+            }
+
+            // Save the state of the "Philanthropic Pioneer" badge if conditions are met
+            if (amount >= 50000 && reason.trim().length > 0) {
+                localStorage.setItem('isPhilanthropicPioneerUnlocked', 'true');
+            }
+
+            // Unlock badges and update dashboard
+            unlockBadges(donationCount, totalDonationAmount, amount, aristocratDonationCount);
+            upd
